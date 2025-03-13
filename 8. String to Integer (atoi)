@@ -1,0 +1,40 @@
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        val = s.strip()
+        if not val:
+            return 0  
+
+        final = ""
+        neg = False
+        start = 0
+
+        if val[0] == "-":
+            neg = True
+            start = 1
+        elif val[0] == "+":
+            start = 1
+
+        for i in range(start, len(val)):
+            if val[i].isdigit():
+                final += val[i]
+            else:
+                break  
+
+        if not final:  
+            return 0
+
+        result = int(final)
+        if neg:
+            result = -result
+
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        if result < INT_MIN:
+            return INT_MIN
+        if result > INT_MAX:
+            return INT_MAX
+
+        return result
