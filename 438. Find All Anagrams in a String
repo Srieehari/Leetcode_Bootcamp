@@ -1,0 +1,57 @@
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+
+        if len(s) < len(p):
+
+            return []
+
+
+        result = []
+
+        dicts = {}
+        dictp = {}
+
+
+        for i in p:
+
+            dictp[i] = dictp.get(i, 0) +1
+
+        for i in range(len(p)):
+
+            dicts[s[i]] = dicts.get(s[i], 0) +1
+
+        if dicts == dictp:
+
+            result.append(0)
+
+        for i in range(len(p), len(s)):
+
+            dicts[s[i]]= dicts.get(s[i], 0)+1
+
+            dicts[s[i-len(p)]] -=1
+
+            if dicts[s[i-len(p)]] == 0:
+
+                del dicts[s[i-len(p)]]
+
+
+            if dicts == dictp:
+
+                result.append(i-len(p)+1)
+
+        return result
+
+
+
+
+
+
+
+
+
+               
